@@ -5,13 +5,13 @@ import SidePanelLists from '../components/homepage/SidePanelLists';
 
 function HomePage() {
   return (
-    <div className="font-poppins">
+    <section className="font-poppins">
       <Navbar />
-      <div className="flex min-h-[91vh] gap-10 bg-[#F5EEDC] p-4 lg:p-20">
+      <div className="flex gap-10 bg-[#F5EEDC] p-4 lg:p-20">
         <ThreadLists />
         <SidePanelLists />
       </div>
-    </div>
+    </section>
   );
 }
 
