@@ -94,9 +94,10 @@ const api = (() => {
     const response = await _fetchWithAuth(`${BASE_URL}/users/me`);
 
     const responseJson = await response.json();
-    const { success, message } = responseJson;
 
-    if (success !== 'success') {
+    const { status, message } = responseJson;
+
+    if (status !== 'success') {
       throw new Error(message);
     }
 

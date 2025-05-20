@@ -23,21 +23,23 @@ function unsetAuthUserActionCreator() {
   };
 }
 
-function asyncSetAuthUserAction({ email, password }) {
+function asyncSetAuthUser({ email, password }) {
   return async (dispatch) => {
     try {
       const token = await api.login({ email, password });
       api.putAccessToken(token);
       const authUser = await api.getOwnProfile();
+      console.log(authUser);
 
       dispatch(setAuthUserActionCreator(authUser));
     } catch (error) {
+      console.error(error);
       alert(error.message);
     }
   };
 }
 
-function asyncUnsetAuthUserAction() {
+function asyncUnsetAuthUser() {
   return (dispatch) => {
     dispatch(unsetAuthUserActionCreator());
     api.putAccessToken('');
@@ -48,6 +50,6 @@ export {
   ActionType,
   setAuthUserActionCreator,
   unsetAuthUserActionCreator,
-  asyncSetAuthUserAction,
-  asyncUnsetAuthUserAction,
+  asyncSetAuthUser,
+  asyncUnsetAuthUser,
 };
