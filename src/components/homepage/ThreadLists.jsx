@@ -1,16 +1,40 @@
 import React from 'react';
-import CreateThread from './CreateThread';
 import ThreadItem from './ThreadItem';
+import PropTypes from 'prop-types';
+import Loading from '../Loading';
 
-function ThreadLists() {
+function ThreadLists({ threads, onUpvote, onDownvote }) {
   return (
-    <section className="flex w-full flex-col gap-10 md:w-2/3">
-      <CreateThread />
-      <ThreadItem />
-      <ThreadItem />
-      <ThreadItem />
+    <section className="flex flex-col gap-10">
+      {threads.length === 0 && <Loading />}
+      {threads.map((thread) => (
+        <ThreadItem
+          key={thread.id}
+          thread={thread}
+          onUpvote={onUpvote}
+          onDownvote={onDownvote}
+        />
+      ))}
     </section>
   );
 }
+
+ThreadLists.propTypes = {
+  threads: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
+      createdAt: PropTypes.number.isRequired,
+      ownerId: PropTypes.string.isRequired,
+      upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+      downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+      totalComments: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+  onUpvote: PropTypes.func.isRequired,
+  onDownvote: PropTypes.func.isRequired,
+};
 
 export default ThreadLists;

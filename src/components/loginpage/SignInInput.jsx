@@ -2,8 +2,9 @@ import React from 'react';
 import useInput from '../../hooks/useInput';
 import Button from '../Button';
 import PropTypes from 'prop-types';
+import Loading from '../Loading';
 
-function SignInInput({ signIn }) {
+function SignInInput({ signIn, loading }) {
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
 
@@ -38,7 +39,7 @@ function SignInInput({ signIn }) {
         type="submit"
         className="bg-primary border-primary hover:text-primary mt-4 w-full rounded-lg border px-4 py-2 font-semibold text-white hover:bg-white md:text-lg"
       >
-        Login
+        {loading ? <Loading /> : 'Sign In'}
       </Button>
     </form>
   );
@@ -46,6 +47,7 @@ function SignInInput({ signIn }) {
 
 SignInInput.propTypes = {
   signIn: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default SignInInput;

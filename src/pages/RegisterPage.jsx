@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RegisterInput from '../components/loginpage/RegisterInput';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { asyncRegisterUser } from '../states/user/action';
 
 function RegisterPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   function onRegister({ event, name, email, password }) {
     event.preventDefault();
+    setLoading(true);
+
     dispatch(asyncRegisterUser({ name, email, password }));
+
+    setLoading(false);
+    alert('Registration successful! Please log in.');
+    navigate('/login');
   }
 
   return (
@@ -18,7 +27,7 @@ function RegisterPage() {
         <h1 className="text-center text-xl font-semibold tracking-wide md:text-2xl">
           Register
         </h1>
-        <RegisterInput register={onRegister} />
+        <RegisterInput register={onRegister} loading={loading} />
         <p className="mt-4 text-center text-sm">
           Already have an account?{' '}
           <Link

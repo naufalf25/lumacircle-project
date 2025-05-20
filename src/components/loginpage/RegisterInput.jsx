@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../../hooks/useInput';
 import Button from '../Button';
+import Loading from '../Loading';
 
-function RegisterInput({ register }) {
+function RegisterInput({ register, loading }) {
   const [name, onNameChange] = useInput('');
   const [email, onEmailChange] = useInput('');
   const [password, onPasswordChange] = useInput('');
@@ -50,7 +51,7 @@ function RegisterInput({ register }) {
         type="submit"
         className="bg-primary border-primary hover:text-primary mt-4 w-full rounded-lg border px-4 py-2 font-semibold text-white hover:bg-white md:text-lg"
       >
-        Register
+        {loading ? <Loading /> : 'Register'}
       </Button>
     </form>
   );
@@ -58,6 +59,7 @@ function RegisterInput({ register }) {
 
 RegisterInput.propTypes = {
   register: PropTypes.func.isRequired,
+  laoding: PropTypes.bool.isRequired,
 };
 
 export default RegisterInput;

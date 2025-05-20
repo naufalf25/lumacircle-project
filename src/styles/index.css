@@ -8,3 +8,11 @@
 .font-poppins {
   font-family: "Poppins", sans-serif;
 }
+
+[contentEditable=true]:empty:before {
+  content: attr(data-placeholder);
+}
+
+[contentEditable=true]:empty:before {
+  @apply text-slate-400;
+}

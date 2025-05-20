@@ -34,7 +34,7 @@ function Navbar({
       {!loginPage && authUser && (
         <div className="relative">
           <Button onClick={() => setNav(!nav)}>
-            <img src={avatar} alt="profile" className="w-10" />
+            <img src={avatar} alt="profile" className="w-10 rounded-full" />
           </Button>
           {nav && (
             <nav className="absolute top-16 right-0 z-10 flex flex-col items-start gap-2 rounded-lg bg-white px-8 py-4 font-semibold text-slate-600 shadow-lg">

@@ -1,15 +1,23 @@
 import React from 'react';
 import SignInInput from '../components/loginpage/SignInInput';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { asyncSetAuthUser } from '../states/authUser/action';
+import { useState } from 'react';
 
 function SignInPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   function onSignIn({ event, email, password }) {
     event.preventDefault();
+    setLoading(true);
+
     dispatch(asyncSetAuthUser({ email, password }));
+
+    setLoading(false);
+    navigate('/');
   }
 
   return (
@@ -18,7 +26,7 @@ function SignInPage() {
         <h1 className="text-center text-xl font-semibold tracking-wide md:text-2xl">
           Sign In
         </h1>
-        <SignInInput signIn={onSignIn} />
+        <SignInInput signIn={onSignIn} loading={loading} />
         <p className="mt-4 text-center text-sm">
           Don't have an account?{' '}
           <Link

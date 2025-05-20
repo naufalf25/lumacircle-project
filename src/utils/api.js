@@ -216,6 +216,7 @@ const api = (() => {
       data: { vote },
     } = responseJson;
 
+    console.log(vote);
     return vote;
   }
 
@@ -348,9 +349,9 @@ const api = (() => {
     const response = await fetch(`${BASE_URL}/leaderboards`);
 
     const responseJson = await response.json();
-    const { success, message } = responseJson;
+    const { status, message } = responseJson;
 
-    if (success !== 'success') {
+    if (status !== 'success') {
       throw new Error(message);
     }
 
