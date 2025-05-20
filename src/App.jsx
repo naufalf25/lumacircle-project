@@ -8,6 +8,7 @@ import RegisterPage from './pages/RegisterPage';
 import { asyncUnsetAuthUser } from './states/authUser/action';
 import SignInPage from './pages/SignInPage';
 import { useState } from 'react';
+import LeaderboardsPage from './pages/LeaderboardsPage';
 
 function App() {
   const { authUser = null, isPreload = false } = useSelector(
@@ -44,6 +45,7 @@ function App() {
           <Route path="/login" element={<SignInPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/leaderboards" element={<LeaderboardsPage />} />
         </Routes>
       </main>
     </>

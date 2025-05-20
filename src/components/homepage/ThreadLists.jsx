@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import Loading from '../Loading';
 
 function ThreadLists({ threads, onUpvote, onDownvote }) {
+  const threadsSorted = threads.sort((a, b) => b.createdAt - a.createdAt);
+
   return (
     <section className="flex flex-col gap-10">
       {threads.length === 0 && <Loading />}
-      {threads.map((thread) => (
+      {threadsSorted.map((thread) => (
         <ThreadItem
           key={thread.id}
           thread={thread}

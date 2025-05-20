@@ -5,6 +5,7 @@ import Button from '../Button';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
+import { postedAt } from '../../utils';
 
 function ThreadItem({ thread, onUpvote, onDownvote }) {
   const {
@@ -15,6 +16,7 @@ function ThreadItem({ thread, onUpvote, onDownvote }) {
     upVotesBy,
     downVotesBy,
     totalComments,
+    createdAt,
     user,
   } = thread;
 
@@ -60,6 +62,9 @@ function ThreadItem({ thread, onUpvote, onDownvote }) {
                 <span>{totalComments}</span> Komentar
               </p>
             </div>
+            <p className="mt-2 text-sm text-slate-500 italic">
+              {postedAt(createdAt)}
+            </p>
           </div>
         </div>
       </div>

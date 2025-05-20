@@ -29,8 +29,7 @@ function HomePage() {
     dispatch(asyncPopulateUsersAndThreads());
   }, [dispatch]);
 
-  const onCreateThread = ({ event, title, body, category }) => {
-    event.preventDefault();
+  const onCreateThread = ({ title, body, category }) => {
     if (!authUser) {
       alert('You must login to create a thread');
 
@@ -40,6 +39,8 @@ function HomePage() {
     setLoading(true);
 
     dispatch(asyncCreateThread({ title, body, category }));
+
+    alert('Thread created successfully!');
 
     setLoading(false);
   };
@@ -109,7 +110,7 @@ function HomePage() {
   }));
 
   return (
-    <section className="font-poppins flex min-h-[94vh] gap-10 bg-[#F5EEDC] p-4 lg:p-20">
+    <section className="font-poppins flex min-h-[92.8vh] gap-10 bg-[#F5EEDC] p-4 lg:p-20">
       {loading && (
         <div className="absolute top-10 right-10">
           <Loading />
