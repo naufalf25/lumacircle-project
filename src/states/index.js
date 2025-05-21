@@ -5,7 +5,7 @@ import usersReducer from './user/reducer';
 import threadsReducer from './threads/reducer';
 import threadDetailReducer from './threadDetail/reducer';
 import leaderboardsReducer from './leaderboards/reducer';
-import logger from 'redux-logger';
+// import logger from 'redux-logger';
 import loadingReducer from './loading/reducer';
 
 const store = configureStore({
@@ -18,7 +18,7 @@ const store = configureStore({
     leaderboards: leaderboardsReducer,
     loading: loadingReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 export default store;
