@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import parse from 'html-react-parser';
 import { postedAt } from '../../utils';
 import VoteButton from '../VoteButton';
+import { useSelector } from 'react-redux';
 
 function ThreadItem({ thread, onUpvote, onDownvote }) {
   const {
@@ -19,8 +20,11 @@ function ThreadItem({ thread, onUpvote, onDownvote }) {
     user,
     owner,
   } = thread;
+  const { authUser } = useSelector((states) => states);
 
   const totalVote = upVotesBy.length - downVotesBy.length;
+  const userUpVote = upVotesBy.includes(authUser?.id) || false;
+  const userDownVote = downVotesBy.includes(authUser?.id) || false;
 
   return (
     <div className="w-full rounded-xl bg-white p-4 shadow-lg md:p-6">
@@ -41,6 +45,8 @@ function ThreadItem({ thread, onUpvote, onDownvote }) {
             onUpvote={onUpvote}
             onDownvote={onDownvote}
             totalVote={totalVote}
+            userUpVote={userUpVote}
+            userDownVote={userDownVote}
           />
           <div>
             {user ? (

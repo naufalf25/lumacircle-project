@@ -3,11 +3,15 @@ import parse from 'html-react-parser';
 import { postedAt } from '../../utils';
 import PropTypes from 'prop-types';
 import VoteButton from '../VoteButton';
+import { useSelector } from 'react-redux';
 
 function CommentItem({ comment, onUpvote, onDownvote }) {
   const { id, content, createdAt, owner } = comment;
+  const { authUser } = useSelector((states) => states);
 
   const totalVote = comment.upVotesBy.length - comment.downVotesBy.length;
+  const userUpVote = comment.upVotesBy.includes(authUser?.id) || false;
+  const userDownVote = comment.downVotesBy.includes(authUser?.id) || false;
 
   return (
     <div className="w-full rounded-xl bg-white p-4 shadow-lg md:p-6">
@@ -21,6 +25,8 @@ function CommentItem({ comment, onUpvote, onDownvote }) {
           onUpvote={onUpvote}
           onDownvote={onDownvote}
           totalVote={totalVote}
+          userUpVote={userUpVote}
+          userDownVote={userDownVote}
         />
         <div className="flex flex-col gap-4">
           <div className="mt-2 text-sm md:text-base">{parse(content)}</div>
