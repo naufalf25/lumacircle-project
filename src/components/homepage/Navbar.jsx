@@ -18,7 +18,7 @@ function Navbar({
   return (
     <section className="flex items-center justify-between bg-white p-4 lg:px-20">
       <Link to="/">
-        <h1 className="text-2xl font-semibold">
+        <h1 className="text-2xl font-bold">
           Luma<span className="text-primary">Circle</span>
         </h1>
       </Link>

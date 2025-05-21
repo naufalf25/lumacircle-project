@@ -9,11 +9,15 @@ import { asyncUnsetAuthUser } from './states/authUser/action';
 import SignInPage from './pages/SignInPage';
 import { useState } from 'react';
 import LeaderboardsPage from './pages/LeaderboardsPage';
+import DetailPage from './pages/DetailPage';
+import Loading from './components/Loading';
 
 function App() {
-  const { authUser = null, isPreload = false } = useSelector(
-    (states) => states,
-  );
+  const {
+    authUser = null,
+    loading,
+    isPreload = false,
+  } = useSelector((states) => states);
   const [nav, setNav] = useState(false);
 
   const dispatch = useDispatch();
@@ -27,7 +31,7 @@ function App() {
     setNav(false);
   };
 
-  if (isPreload) return null;
+  if (isPreload && loading) return <Loading />;
 
   return (
     <>
@@ -45,6 +49,7 @@ function App() {
           <Route path="/login" element={<SignInPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/" element={<HomePage />} />
+          <Route path="/thread/:id" element={<DetailPage />} />
           <Route path="/leaderboards" element={<LeaderboardsPage />} />
         </Routes>
       </main>

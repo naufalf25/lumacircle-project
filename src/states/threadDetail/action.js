@@ -1,4 +1,5 @@
 import api from '../../utils/api';
+import { hideLoading, showLoading } from '../loading/action';
 
 const ActionType = {
   RECEIVE_THREAD_DETAIL: 'RECEIVE_THREAD_DETAIL',
@@ -6,6 +7,10 @@ const ActionType = {
   UPVOTE_THREAD_DETAIL: 'UPVOTE_THREAD_DETAIL',
   DOWNVOTE_THREAD_DETAIL: 'DOWNVOTE_THREAD_DETAIL',
   NEUTRALIZE_THREAD_DETAIL_VOTE: 'NEUTRALIZE_THREAD_DETAIL_VOTE',
+  CREATE_COMMENT: 'CREATE_COMMENT',
+  UPVOTE_COMMENT: 'UPVOTE_COMMENT',
+  DOWNVOTE_COMMENT: 'DOWNVOTE_COMMENT',
+  NEUTRALIZE_COMMENT_VOTE: 'NEUTRALIZE_COMMENT_VOTE',
 };
 
 function receiveThreadDetalActionCreator(threadDetail) {
@@ -44,7 +49,46 @@ function downvoteThreadDetailActionCreator(userId) {
 function neutralizeThreadDetailVoteActionCreator(userId) {
   return {
     type: ActionType.NEUTRALIZE_THREAD_DETAIL_VOTE,
-    paylaod: {
+    payload: {
+      userId,
+    },
+  };
+}
+
+function createCommentActionCreator(comment) {
+  return {
+    type: ActionType.CREATE_COMMENT,
+    payload: {
+      comment,
+    },
+  };
+}
+
+function upvoteCommentActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.UPVOTE_COMMENT,
+    payload: {
+      commentId,
+      userId,
+    },
+  };
+}
+
+function downvoteCommentActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.DOWNVOTE_COMMENT,
+    payload: {
+      commentId,
+      userId,
+    },
+  };
+}
+
+function neutralizeCommentVoteActionCreator({ commentId, userId }) {
+  return {
+    type: ActionType.NEUTRALIZE_COMMENT_VOTE,
+    payload: {
+      commentId,
       userId,
     },
   };
@@ -52,6 +96,7 @@ function neutralizeThreadDetailVoteActionCreator(userId) {
 
 function asyncReceiveThreadDetail(threadId) {
   return async (dispatch) => {
+    dispatch(showLoading());
     dispatch(clearThreadDetailActionCreator());
 
     try {
@@ -60,11 +105,15 @@ function asyncReceiveThreadDetail(threadId) {
     } catch (error) {
       alert(error.message);
     }
+
+    dispatch(hideLoading());
   };
 }
 
 function asyncUpvoteThreadDetail() {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
+
     const { authUser, threadDetail } = getState();
     dispatch(upvoteThreadDetailActionCreator(authUser.id));
 
@@ -73,11 +122,15 @@ function asyncUpvoteThreadDetail() {
     } catch (error) {
       alert(error.message);
     }
+
+    dispatch(hideLoading());
   };
 }
 
 function asyncDownvoteThreadDetail() {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
+
     const { authUser, threadDetail } = getState();
     dispatch(downvoteThreadDetailActionCreator(authUser.id));
 
@@ -86,11 +139,15 @@ function asyncDownvoteThreadDetail() {
     } catch (error) {
       alert(error.message);
     }
+
+    dispatch(hideLoading());
   };
 }
 
 function asyncNeutralizeThreadDetailVote() {
   return async (dispatch, getState) => {
+    dispatch(showLoading());
+
     const { authUser, threadDetail } = getState();
     dispatch(neutralizeThreadDetailVoteActionCreator(authUser.id));
 
@@ -99,6 +156,107 @@ function asyncNeutralizeThreadDetailVote() {
     } catch (error) {
       alert(error.message);
     }
+
+    dispatch(hideLoading());
+  };
+}
+
+function asyncCreateComment({ content, threadId }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+
+    try {
+      const comment = await api.createComment({ content, threadId });
+      dispatch(createCommentActionCreator(comment));
+    } catch (error) {
+      alert(error.message);
+    }
+
+    dispatch(hideLoading());
+  };
+}
+
+function asyncUpvoteComment(commentId) {
+  return async (dispatch, getState) => {
+    dispatch(showLoading());
+
+    const { threadDetail, authUser } = getState();
+    dispatch(
+      upvoteCommentActionCreator({
+        commentId,
+        userId: authUser.id,
+      }),
+    );
+
+    try {
+      await api.upvoteComment({ threadId: threadDetail.id, commentId });
+    } catch (error) {
+      alert(error.message);
+      dispatch(
+        upvoteCommentActionCreator({
+          commentId,
+          userId: authUser.id,
+        }),
+      );
+    }
+
+    dispatch(hideLoading());
+  };
+}
+
+function asyncDownvoteComment(commentId) {
+  return async (dispatch, getState) => {
+    dispatch(showLoading());
+
+    const { threadDetail, authUser } = getState();
+    dispatch(
+      downvoteCommentActionCreator({
+        commentId,
+        userId: authUser.id,
+      }),
+    );
+
+    try {
+      await api.downvoteComment({ threadId: threadDetail.id, commentId });
+    } catch (error) {
+      alert(error.message);
+      dispatch(
+        downvoteCommentActionCreator({
+          commentId,
+          userId: authUser.id,
+        }),
+      );
+    }
+
+    dispatch(hideLoading());
+  };
+}
+
+function asyncNeutralizeCommentVote(commentId) {
+  return async (dispatch, getState) => {
+    dispatch(showLoading());
+
+    const { threadDetail, authUser } = getState();
+    dispatch(
+      neutralizeCommentVoteActionCreator({
+        commentId,
+        userId: authUser.id,
+      }),
+    );
+
+    try {
+      await api.neutralizeCommentVote({ threadId: threadDetail.id, commentId });
+    } catch (error) {
+      alert(error.message);
+      dispatch(
+        neutralizeCommentVoteActionCreator({
+          commentId,
+          userId: authUser.id,
+        }),
+      );
+    }
+
+    dispatch(hideLoading());
   };
 }
 
@@ -109,8 +267,16 @@ export {
   upvoteThreadDetailActionCreator,
   downvoteThreadDetailActionCreator,
   neutralizeThreadDetailVoteActionCreator,
+  createCommentActionCreator,
+  upvoteCommentActionCreator,
+  downvoteCommentActionCreator,
+  neutralizeCommentVoteActionCreator,
   asyncReceiveThreadDetail,
   asyncUpvoteThreadDetail,
   asyncDownvoteThreadDetail,
   asyncNeutralizeThreadDetailVote,
+  asyncCreateComment,
+  asyncUpvoteComment,
+  asyncDownvoteComment,
+  asyncNeutralizeCommentVote,
 };

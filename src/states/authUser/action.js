@@ -1,4 +1,5 @@
 import api from '../../utils/api';
+import { hideLoading, showLoading } from '../loading/action';
 
 const ActionType = {
   SET_AUTH_USER: 'SET_AUTH_USER',
@@ -25,6 +26,8 @@ function unsetAuthUserActionCreator() {
 
 function asyncSetAuthUser({ email, password }) {
   return async (dispatch) => {
+    dispatch(showLoading());
+
     try {
       const token = await api.login({ email, password });
       api.putAccessToken(token);
@@ -32,17 +35,24 @@ function asyncSetAuthUser({ email, password }) {
       console.log(authUser);
 
       dispatch(setAuthUserActionCreator(authUser));
+      window.location.href = '/';
     } catch (error) {
       console.error(error);
       alert(error.message);
     }
+
+    dispatch(hideLoading());
   };
 }
 
 function asyncUnsetAuthUser() {
   return (dispatch) => {
+    dispatch(showLoading());
+
     dispatch(unsetAuthUserActionCreator());
     api.putAccessToken('');
+
+    dispatch(hideLoading());
   };
 }
 

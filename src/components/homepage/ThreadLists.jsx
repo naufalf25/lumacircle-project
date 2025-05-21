@@ -1,14 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ThreadItem from './ThreadItem';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
 
 function ThreadLists({ threads, onUpvote, onDownvote }) {
   const threadsSorted = threads.sort((a, b) => b.createdAt - a.createdAt);
+  const [isWaiting, setIsWaiting] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsWaiting(false);
+    }, 10000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section className="flex flex-col gap-10">
-      {threads.length === 0 && <Loading />}
+      {isWaiting && threads.length === 0 && <Loading />}
+      {!isWaiting && threads.length === 0 && (
+        <div className="w-full rounded-xl bg-white p-4 shadow-lg md:p-6">
+          <p className="text-center text-xl font-semibold">
+            Threads data not available!
+          </p>
+        </div>
+      )}
       {threadsSorted.map((thread) => (
         <ThreadItem
           key={thread.id}

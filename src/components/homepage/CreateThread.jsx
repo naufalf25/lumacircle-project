@@ -16,8 +16,12 @@ function CreateThread({ onCreateThread, authUser }) {
   return (
     <section className="mb-4 rounded-lg bg-white p-4 shadow-lg lg:px-10">
       <div className="flex w-full items-center justify-between gap-2">
-        <p className={`${openInput ? 'text-white' : 'text-slate-400'}`}>
-          Do you have something to share for everyone?
+        <p
+          className={`${openInput ? 'text-lg font-semibold text-black md:text-xl' : 'text-slate-400'}`}
+        >
+          {openInput
+            ? 'Create New Thread'
+            : 'Do you have something to share for everyone?'}
         </p>
         <Button
           onClick={() =>

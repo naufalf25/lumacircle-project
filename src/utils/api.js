@@ -216,7 +216,6 @@ const api = (() => {
       data: { vote },
     } = responseJson;
 
-    console.log(vote);
     return vote;
   }
 
