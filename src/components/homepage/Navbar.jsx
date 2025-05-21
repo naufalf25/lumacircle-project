@@ -17,7 +17,8 @@ function Navbar({
 
   return (
     <section className="flex items-center justify-between bg-white p-4 lg:px-20">
-      <Link to="/">
+      <Link to="/" className="flex items-center gap-4">
+        <img src="/logotitle.png" alt="logo" className="w-10" />
         <h1 className="text-2xl font-bold">
           Luma<span className="text-primary">Circle</span>
         </h1>
