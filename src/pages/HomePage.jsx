@@ -115,11 +115,13 @@ function HomePage() {
       )}
       <div className="flex w-full flex-col gap-10 md:w-2/3">
         <CreateThread onCreateThread={onCreateThread} authUser={authUser} />
-        <CategoryLists
-          categoryState={category}
-          threads={threads}
-          filterThreadsHandler={filterThreadsHandler}
-        />
+        {!loading && (
+          <CategoryLists
+            categoryState={category}
+            threads={threads}
+            filterThreadsHandler={filterThreadsHandler}
+          />
+        )}
         <ThreadLists
           threads={threadsByCategory}
           onUpvote={onUpvote}
