@@ -6,7 +6,7 @@ function CategoryLists({ categoryState, threads, filterThreadsHandler }) {
   const categories = [...new Set(threads.map((thread) => thread.category))];
 
   return (
-    <div className="flex items-center gap-4 rounded-lg bg-white p-4 shadow-lg lg:px-10">
+    <div className="flex w-full flex-wrap items-center gap-4 rounded-lg bg-white p-4 shadow-lg lg:px-10">
       {categories.map((category) => (
         <Button
           onClick={(event) =>
