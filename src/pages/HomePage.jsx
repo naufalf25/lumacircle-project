@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ThreadLists from '../components/homepage/ThreadLists';
 import SidePanelLists from '../components/homepage/SidePanelLists';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,6 +14,7 @@ import {
   asyncUpvoteThread,
 } from '../states/threads/action';
 import Loading from '../components/Loading';
+import CategoryLists from '../components/homepage/CategoryLists';
 
 function HomePage() {
   const {
@@ -25,6 +26,8 @@ function HomePage() {
   } = useSelector((states) => states);
 
   const dispatch = useDispatch();
+
+  const [category, setCategory] = useState('');
 
   useEffect(() => {
     dispatch(asyncPopulateUsersAndThreads());
@@ -89,6 +92,20 @@ function HomePage() {
     authUser: authUser?.id,
   }));
 
+  const threadsByCategory = threadLists.filter((thread) =>
+    thread.category.includes(category),
+  );
+
+  const filterThreadsHandler = ({ event, targetCategory }) => {
+    event.preventDefault();
+
+    if (targetCategory === category) {
+      setCategory('');
+    } else {
+      setCategory(targetCategory);
+    }
+  };
+
   return (
     <section className="font-poppins flex min-h-[92.8vh] gap-10 bg-[#F5EEDC] px-4 py-20 lg:p-20">
       {loading && (
@@ -98,8 +115,13 @@ function HomePage() {
       )}
       <div className="flex w-full flex-col gap-10 md:w-2/3">
         <CreateThread onCreateThread={onCreateThread} authUser={authUser} />
+        <CategoryLists
+          categoryState={category}
+          threads={threads}
+          filterThreadsHandler={filterThreadsHandler}
+        />
         <ThreadLists
-          threads={threadLists}
+          threads={threadsByCategory}
           onUpvote={onUpvote}
           onDownvote={onDownvote}
         />

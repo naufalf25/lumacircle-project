@@ -10,7 +10,6 @@ function LeaderboardItem({ leaderboard }) {
         <img src={user.avatar} alt="profile" className="w-8 rounded-full" />
         <div className="flex flex-col">
           <p className="font-sm font-semibold">{user.name}</p>
-          <p className="text-xs text-slate-400">{user.email}</p>
         </div>
       </div>
       <p className="mt-2 font-semibold">{score} points</p>
