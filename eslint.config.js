@@ -6,6 +6,7 @@ import daStyle from 'eslint-config-dicodingacademy';
 
 export default [
   { ignores: ['dist'] },
+  daStyle,
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -20,7 +21,6 @@ export default [
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      'da-style': daStyle,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -30,6 +30,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'linebreak-style': 0,
+      indent: 0,
     },
   },
 ];
