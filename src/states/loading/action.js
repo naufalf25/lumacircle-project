@@ -16,15 +16,11 @@ function hideLoadingActionCreator() {
 }
 
 function showLoading() {
-  return (dispatch) => {
-    dispatch(showLoadingActionCreator());
-  };
+  return showLoadingActionCreator();
 }
 
 function hideLoading() {
-  return (dispatch) => {
-    dispatch(hideLoadingActionCreator());
-  };
+  return hideLoadingActionCreator();
 }
 
 export {

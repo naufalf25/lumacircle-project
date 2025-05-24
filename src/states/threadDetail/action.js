@@ -2,15 +2,15 @@ import api from '../../utils/api';
 import { hideLoading, showLoading } from '../loading/action';
 
 const ActionType = {
-  RECEIVE_THREAD_DETAIL: 'RECEIVE_THREAD_DETAIL',
-  CLEAR_THREAD_DETAIL: 'CLEAR_THREAD_DETAIL',
-  UPVOTE_THREAD_DETAIL: 'UPVOTE_THREAD_DETAIL',
-  DOWNVOTE_THREAD_DETAIL: 'DOWNVOTE_THREAD_DETAIL',
-  NEUTRALIZE_THREAD_DETAIL_VOTE: 'NEUTRALIZE_THREAD_DETAIL_VOTE',
-  CREATE_COMMENT: 'CREATE_COMMENT',
-  UPVOTE_COMMENT: 'UPVOTE_COMMENT',
-  DOWNVOTE_COMMENT: 'DOWNVOTE_COMMENT',
-  NEUTRALIZE_COMMENT_VOTE: 'NEUTRALIZE_COMMENT_VOTE',
+  RECEIVE_THREAD_DETAIL: 'threadDetail/receive',
+  CLEAR_THREAD_DETAIL: 'threadDetail/clear',
+  UPVOTE_THREAD_DETAIL: 'threadDetail/upVote',
+  DOWNVOTE_THREAD_DETAIL: 'threadDetail/downVote',
+  NEUTRALIZE_THREAD_DETAIL_VOTE: 'threadDetail/neutralizeVote',
+  CREATE_COMMENT: 'threadDetail/comment/create',
+  UPVOTE_COMMENT: 'threadDetail/comment/upVote',
+  DOWNVOTE_COMMENT: 'threadDetail/comment/downVote',
+  NEUTRALIZE_COMMENT_VOTE: 'threadDetail/comment/neutralizeVote',
 };
 
 function receiveThreadDetalActionCreator(threadDetail) {
