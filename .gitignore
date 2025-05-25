@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 .qodo
 screenshots
+
+*storybook.log

@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function Button({ children, type, className, onClick, disabled = false }) {
+function Button({ children, type = '', className, onClick, disabled = false }) {
   return (
     <button
       type={type}
-      className={`cursor-pointer ${className}`}
+      className={`${disabled ? 'cursor-not-allowed' : 'cursor-pointer'} ${className}`}
       onClick={onClick}
       disabled={disabled}
     >
@@ -15,10 +15,15 @@ function Button({ children, type, className, onClick, disabled = false }) {
 }
 
 Button.propTypes = {
+  /** The inner HTML of the button or value of the button */
   children: PropTypes.node.isRequired,
+  /** The type of the button */
   type: PropTypes.string,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
+  /** Add class to the button */
+  className: PropTypes.string.isRequired,
+  /** Action when button is clicked */
+  onClick: PropTypes.func.isRequired,
+  /** Status disable of the button */
   disabled: PropTypes.bool,
 };
 
