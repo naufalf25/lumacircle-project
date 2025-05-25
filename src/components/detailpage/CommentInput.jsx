@@ -6,15 +6,8 @@ import Button from '../Button';
 function CommentInput({ createCommentHandler }) {
   const [content, setContent] = useInput('');
 
-  const createComment = (event) => {
-    event.preventDefault();
-
-    createCommentHandler(content);
-    setContent('');
-  };
-
   return (
-    <form onSubmit={createComment}>
+    <form onSubmit={(event) => createCommentHandler({ event, content })}>
       <input
         type="text"
         placeholder="Add your comment to this thread here..."
