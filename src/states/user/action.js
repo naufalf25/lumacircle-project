@@ -2,7 +2,7 @@ import api from '../../utils/api';
 import { hideLoading, showLoading } from '../loading/action';
 
 const ActionType = {
-  RECEIVE_USERS: 'RECEIVE_USERS',
+  RECEIVE_USERS: 'users/receive',
 };
 
 function receiveUsersActionCreator(users) {

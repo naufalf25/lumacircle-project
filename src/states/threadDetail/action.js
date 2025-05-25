@@ -7,10 +7,10 @@ const ActionType = {
   UPVOTE_THREAD_DETAIL: 'threadDetail/upVote',
   DOWNVOTE_THREAD_DETAIL: 'threadDetail/downVote',
   NEUTRALIZE_THREAD_DETAIL_VOTE: 'threadDetail/neutralizeVote',
-  CREATE_COMMENT: 'threadDetail/comment/create',
-  UPVOTE_COMMENT: 'threadDetail/comment/upVote',
-  DOWNVOTE_COMMENT: 'threadDetail/comment/downVote',
-  NEUTRALIZE_COMMENT_VOTE: 'threadDetail/comment/neutralizeVote',
+  CREATE_COMMENT: 'threadDetail/comments/create',
+  UPVOTE_COMMENT: 'threadDetail/comments/upVote',
+  DOWNVOTE_COMMENT: 'threadDetail/comments/downVote',
+  NEUTRALIZE_COMMENT_VOTE: 'threadDetail/comments/neutralizeVote',
 };
 
 function receiveThreadDetalActionCreator(threadDetail) {

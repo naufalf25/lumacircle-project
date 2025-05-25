@@ -244,7 +244,7 @@ describe('ThreadDetailReducer function', () => {
       comments: [],
     };
     const action = {
-      type: 'threadDetail/comment/create',
+      type: 'threadDetail/comments/create',
       payload: {
         comment: {
           id: 'comment-1',
@@ -303,21 +303,21 @@ describe('ThreadDetailReducer function', () => {
     };
 
     const upVoteAction = {
-      type: 'threadDetail/comment/upVote',
+      type: 'threadDetail/comments/upVote',
       payload: {
         commentId: 'comment-x',
         userId: 'users-2',
       },
     };
     const downVoteAction = {
-      type: 'threadDetail/comment/downVote',
+      type: 'threadDetail/comments/downVote',
       payload: {
         commentId: 'comment-x',
         userId: 'users-2',
       },
     };
     const neutralizeVoteAction = {
-      type: 'threadDetail/comment/neutralizeVote',
+      type: 'threadDetail/comments/neutralizeVote',
       payload: {
         commentId: 'comment-x',
         userId: 'users-2',
@@ -369,7 +369,7 @@ describe('ThreadDetailReducer function', () => {
       ],
     };
     const action = {
-      type: 'threadDetail/comment/upVote',
+      type: 'threadDetail/comments/upVote',
       payload: {
         commentId: 'comment-1',
         userId: 'users-2',
@@ -422,7 +422,7 @@ describe('ThreadDetailReducer function', () => {
       ],
     };
     const action = {
-      type: 'threadDetail/comment/downVote',
+      type: 'threadDetail/comments/downVote',
       payload: {
         commentId: 'comment-1',
         userId: 'users-2',
@@ -475,7 +475,7 @@ describe('ThreadDetailReducer function', () => {
       ],
     };
     const action = {
-      type: 'threadDetail/comment/neutralizeVote',
+      type: 'threadDetail/comments/neutralizeVote',
       payload: {
         commentId: 'comment-1',
         userId: 'users-x',
@@ -520,7 +520,7 @@ describe('ThreadDetailReducer function', () => {
       ],
     };
     const action = {
-      type: 'threadDetail/comment/neutralizeVote',
+      type: 'threadDetail/comments/neutralizeVote',
       payload: {
         commentId: 'comment-1',
         userId: 'users-2',
@@ -573,7 +573,7 @@ describe('ThreadDetailReducer function', () => {
       ],
     };
     const action = {
-      type: 'threadDetail/comment/neutralizeVote',
+      type: 'threadDetail/comments/neutralizeVote',
       payload: {
         commentId: 'comment-1',
         userId: 'users-2',
