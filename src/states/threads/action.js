@@ -2,11 +2,11 @@ import api from '../../utils/api';
 import { hideLoading, showLoading } from '../loading/action';
 
 const ActionType = {
-  RECEIVE_THREADS: 'RECEIVE_THREADS',
-  CREATE_THREAD: 'CREATE_THREAD',
-  UPVOTE_THREAD: 'UPVOTE_THREAD',
-  DOWNVOTE_THREAD: 'DOWNVOTE_THREAD',
-  NEUTRALIZE_THREAD_VOTE: 'NEUTRALIZE_THREAD_VOTE',
+  RECEIVE_THREADS: 'threads/receive',
+  CREATE_THREAD: 'threads/create',
+  UPVOTE_THREAD: 'threads/upVote',
+  DOWNVOTE_THREAD: 'threads/downVote',
+  NEUTRALIZE_THREAD_VOTE: 'threads/neutralizeVote',
 };
 
 function receiveThreadsActionCreator(threads) {

@@ -31,6 +31,7 @@ function ThreadInput({ createThreadHandler }) {
           className="focus:border-b-primary border-b-2 border-b-transparent px-4 py-2 pb-2 outline-none"
           html={body}
           onChange={setBody}
+          placeholder="What you think to write about this thread....."
           data-placeholder="What you think to write about this thread....."
           required
         />

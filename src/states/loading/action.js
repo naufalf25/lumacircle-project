@@ -1,6 +1,6 @@
 const ActionType = {
-  SHOW_LOADING: 'SHOW_LOADING',
-  HIDE_LOADING: 'HIDE_LOADING',
+  SHOW_LOADING: 'loading/show',
+  HIDE_LOADING: 'loading/hide',
 };
 
 function showLoadingActionCreator() {
@@ -16,15 +16,11 @@ function hideLoadingActionCreator() {
 }
 
 function showLoading() {
-  return (dispatch) => {
-    dispatch(showLoadingActionCreator());
-  };
+  return showLoadingActionCreator();
 }
 
 function hideLoading() {
-  return (dispatch) => {
-    dispatch(hideLoadingActionCreator());
-  };
+  return hideLoadingActionCreator();
 }
 
 export {

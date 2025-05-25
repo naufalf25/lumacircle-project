@@ -114,7 +114,9 @@ function DetailPage() {
     dispatch(asyncDownvoteComment(id));
   };
 
-  const createCommandHandler = (content) => {
+  const createCommandHandler = ({ event, content }) => {
+    event.preventDefault();
+
     if (!authUser) {
       alert('You must login to add a new comment!');
     }
