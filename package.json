@@ -16,6 +16,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/vite": "^4.0.15",
     "html-react-parser": "^5.2.5",
+    "motion": "^12.12.2",
     "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-contenteditable": "^3.3.7",

@@ -5,6 +5,7 @@ import Button from '../Button';
 import PropTypes from 'prop-types';
 import { MdLeaderboard } from 'react-icons/md';
 import { PiSignOutBold } from 'react-icons/pi';
+import { motion } from 'motion/react';
 
 function Navbar({
   loginPage = false,
@@ -38,23 +39,29 @@ function Navbar({
             <img src={avatar} alt="profile" className="w-10 rounded-full" />
           </Button>
           {nav && (
-            <nav className="absolute top-16 right-0 z-10 flex flex-col items-start gap-2 rounded-lg bg-white px-8 py-4 font-semibold text-slate-600 shadow-lg">
-              <Link to="/leaderboards" className="w-full">
-                <div className="flex items-center gap-2">
-                  <MdLeaderboard className="text-2xl" />
-                  <p>Leaderboards</p>
-                </div>
-              </Link>
-              <Button
-                onClick={onSignOut}
-                className="mt-2 w-full border-t border-t-slate-700 pt-4 text-start"
-              >
-                <div className="flex items-center gap-2">
-                  <PiSignOutBold className="text-2xl" />
-                  <p>Logout</p>
-                </div>
-              </Button>
-            </nav>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+              className="absolute top-16 right-0 z-10"
+            >
+              <nav className="flex flex-col items-start gap-2 rounded-lg bg-white px-8 py-4 font-semibold text-slate-600 shadow-lg">
+                <Link to="/leaderboards" className="w-full">
+                  <div className="flex items-center gap-2">
+                    <MdLeaderboard className="text-2xl" />
+                    <p>Leaderboards</p>
+                  </div>
+                </Link>
+                <Button
+                  onClick={onSignOut}
+                  className="mt-2 w-full border-t border-t-slate-700 pt-4 text-start"
+                >
+                  <div className="flex items-center gap-2">
+                    <PiSignOutBold className="text-2xl" />
+                    <p>Logout</p>
+                  </div>
+                </Button>
+              </nav>
+            </motion.div>
           )}
         </div>
       )}

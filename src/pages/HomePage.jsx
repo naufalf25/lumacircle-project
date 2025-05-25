@@ -15,6 +15,7 @@ import {
 } from '../states/threads/action';
 import Loading from '../components/Loading';
 import CategoryLists from '../components/homepage/CategoryLists';
+import { motion } from 'motion/react';
 
 function HomePage() {
   const {
@@ -114,13 +115,25 @@ function HomePage() {
         </div>
       )}
       <div className="flex w-full flex-col gap-10 md:w-2/3">
-        <CreateThread onCreateThread={onCreateThread} authUser={authUser} />
-        {!loading && (
-          <CategoryLists
-            categoryState={category}
-            threads={threads}
-            filterThreadsHandler={filterThreadsHandler}
-          />
+        <motion.div
+          initial={{ x: -1000 }}
+          animate={{ x: 0 }}
+          transition={{ type: 'spring', stiffness: 50 }}
+        >
+          <CreateThread onCreateThread={onCreateThread} authUser={authUser} />
+        </motion.div>
+        {threads.length !== 0 && (
+          <motion.div
+            initial={{ y: 1000 }}
+            animate={{ y: 0 }}
+            transition={{ type: 'spring', stiffness: 50 }}
+          >
+            <CategoryLists
+              categoryState={category}
+              threads={threads}
+              filterThreadsHandler={filterThreadsHandler}
+            />
+          </motion.div>
         )}
         <ThreadLists
           threads={threadsByCategory}
