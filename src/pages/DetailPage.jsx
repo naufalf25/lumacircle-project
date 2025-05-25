@@ -16,6 +16,7 @@ import ThreadItem from '../components/homepage/ThreadItem';
 import Loading from '../components/Loading';
 import CommentLists from '../components/detailpage/CommentLists';
 import CreateComment from '../components/detailpage/CreateComment';
+import { motion } from 'motion/react';
 
 function DetailPage() {
   const { id } = useParams();
@@ -136,29 +137,44 @@ function DetailPage() {
         </div>
       )}
       {!loading && !threadDetail && (
-        <section className="font-poppins flex min-h-[92.8vh] items-start justify-center gap-10 bg-[#F5EEDC] p-4 lg:p-20">
-          <div className="w-full rounded-lg bg-white p-4 shadow-md md:p-6 lg:p-10">
-            <p className="text-center text-lg font-semibold md:text-xl lg:text-2xl">
-              Thread #{id} not found!
-            </p>
-            <div className="mt-10 flex items-center justify-center">
-              <Link
-                to="/"
-                className="bg-primary border-primary hover:text-primary rounded-lg border px-8 py-2 text-lg font-semibold text-white hover:bg-transparent"
-              >
-                Back to Home
-              </Link>
-            </div>
+        <motion.div
+          initial={{ opacity: 0, y: -500 }}
+          animate={{
+            opacity: 1,
+            y: 0,
+            transition: { type: 'spring', stiffness: 50 },
+          }}
+          className="w-full rounded-lg bg-white p-4 shadow-md md:p-6 lg:p-10"
+        >
+          <p className="text-center text-lg font-semibold md:text-xl lg:text-2xl">
+            Thread #{id} not found!
+          </p>
+          <div className="mt-10 flex items-center justify-center">
+            <Link
+              to="/"
+              className="bg-primary border-primary hover:text-primary rounded-lg border px-8 py-2 text-lg font-semibold text-white hover:bg-transparent"
+            >
+              Back to Home
+            </Link>
           </div>
-        </section>
+        </motion.div>
       )}
       {threadDetail && (
         <div className="w-full">
-          <ThreadItem
-            thread={threadDetail}
-            onUpvote={onUpvote}
-            onDownvote={onDownvote}
-          />
+          <motion.div
+            initial={{ opacity: 0, y: 100 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              transition: { type: 'spring', stiffness: 50 },
+            }}
+          >
+            <ThreadItem
+              thread={threadDetail}
+              onUpvote={onUpvote}
+              onDownvote={onDownvote}
+            />
+          </motion.div>
           <CommentLists
             comments={threadDetail.comments}
             onUpvote={onUpvoteComment}

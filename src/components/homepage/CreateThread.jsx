@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../Button';
 import PropTypes from 'prop-types';
 import ThreadInput from './ThreadInput';
+import { motion } from 'motion/react';
 
 function CreateThread({ onCreateThread, authUser }) {
   const [openInput, setOpenInput] = useState(false);
@@ -34,7 +35,14 @@ function CreateThread({ onCreateThread, authUser }) {
           {openInput ? 'X' : '+ NEW'}
         </Button>
       </div>
-      {openInput && <ThreadInput createThreadHandler={createThreadHandler} />}
+      {openInput && (
+        <motion.div
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
+        >
+          <ThreadInput createThreadHandler={createThreadHandler} />
+        </motion.div>
+      )}
     </section>
   );
 }

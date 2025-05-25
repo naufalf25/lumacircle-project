@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ThreadItem from './ThreadItem';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
+import { AnimatePresence, motion } from 'motion/react';
 
 function ThreadLists({ threads, onUpvote, onDownvote }) {
   const threadsSorted = threads.sort((a, b) => b.createdAt - a.createdAt);
@@ -15,8 +16,23 @@ function ThreadLists({ threads, onUpvote, onDownvote }) {
     return () => clearTimeout(timer);
   }, []);
 
+  const threadMotionContainer = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.5,
+      },
+    },
+  };
+
+  const threadMotionItem = {
+    hidden: { opacity: 0, y: 200 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
-    <section className="flex flex-col gap-10">
+    <section>
       {isWaiting && threads.length === 0 && <Loading />}
       {!isWaiting && threads.length === 0 && (
         <div className="w-full rounded-xl bg-white p-4 shadow-lg md:p-6">
@@ -25,14 +41,22 @@ function ThreadLists({ threads, onUpvote, onDownvote }) {
           </p>
         </div>
       )}
-      {threadsSorted.map((thread) => (
-        <ThreadItem
-          key={thread.id}
-          thread={thread}
-          onUpvote={onUpvote}
-          onDownvote={onDownvote}
-        />
-      ))}
+      <motion.div
+        initial="hidden"
+        animate="show"
+        variants={threadMotionContainer}
+        className="flex flex-col gap-10"
+      >
+        {threadsSorted.map((thread) => (
+          <motion.div key={thread.id} variants={threadMotionItem}>
+            <ThreadItem
+              thread={thread}
+              onUpvote={onUpvote}
+              onDownvote={onDownvote}
+            />
+          </motion.div>
+        ))}
+      </motion.div>
     </section>
   );
 }
