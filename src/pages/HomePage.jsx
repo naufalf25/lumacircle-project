@@ -29,19 +29,23 @@ function HomePage() {
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState('');
+  const [openInput, setOpenInput] = useState(false);
 
   useEffect(() => {
     dispatch(asyncPopulateUsersAndThreads());
     dispatch(asyncPopulateLeaderboards());
   }, [dispatch]);
 
-  const onCreateThread = ({ title, body, category }) => {
+  const onCreateThread = ({ event, title, body, category }) => {
+    event.preventDefault();
+
     if (!authUser) {
       alert('You must login to create a thread');
       return;
     }
 
     dispatch(asyncCreateThread({ title, body, category }));
+    setOpenInput(false);
   };
 
   const onUpvote = (id) => {
@@ -120,7 +124,12 @@ function HomePage() {
           animate={{ x: 0 }}
           transition={{ type: 'spring', stiffness: 50 }}
         >
-          <CreateThread onCreateThread={onCreateThread} authUser={authUser} />
+          <CreateThread
+            onCreateThread={onCreateThread}
+            authUser={authUser}
+            openInput={openInput}
+            setOpenInput={setOpenInput}
+          />
         </motion.div>
         {threads.length !== 0 && (
           <motion.div

@@ -32,12 +32,10 @@ function asyncSetAuthUser({ email, password }) {
       const token = await api.login({ email, password });
       api.putAccessToken(token);
       const authUser = await api.getOwnProfile();
-      console.log(authUser);
 
       dispatch(setAuthUserActionCreator(authUser));
       window.location.href = '/';
     } catch (error) {
-      console.error(error);
       alert(error.message);
     }
 
