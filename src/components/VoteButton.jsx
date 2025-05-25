@@ -7,7 +7,7 @@ function VoteButton({
   id,
   onUpvote,
   onDownvote,
-  totalVote,
+  totalVote = 0,
   userUpVote = false,
   userDownVote = false,
 }) {
@@ -31,11 +31,17 @@ function VoteButton({
 }
 
 VoteButton.propTypes = {
+  /** The ID of target thread or comment */
   id: PropTypes.string.isRequired,
+  /** The up vote function handler */
   onUpvote: PropTypes.func.isRequired,
+  /** The down vote function handler */
   onDownvote: PropTypes.func.isRequired,
+  /** The total of vote from target thread or comment */
   totalVote: PropTypes.number.isRequired,
+  /** The current status of user up vote or not */
   userUpVote: PropTypes.bool.isRequired,
+  /** The current status of user down vote or not */
   userDownVote: PropTypes.bool.isRequired,
 };
 
