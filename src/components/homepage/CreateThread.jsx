@@ -4,16 +4,7 @@ import PropTypes from 'prop-types';
 import ThreadInput from './ThreadInput';
 import { motion } from 'motion/react';
 
-function CreateThread({ onCreateThread, authUser }) {
-  const [openInput, setOpenInput] = useState(false);
-
-  const createThreadHandler = ({ event, title, body, category }) => {
-    event.preventDefault();
-
-    onCreateThread({ title, body, category });
-    setOpenInput(false);
-  };
-
+function CreateThread({ onCreateThread, authUser, openInput, setOpenInput }) {
   return (
     <section className="mb-4 rounded-lg bg-white p-4 shadow-lg lg:px-10">
       <div className="flex w-full items-center justify-between gap-2">
@@ -40,7 +31,7 @@ function CreateThread({ onCreateThread, authUser }) {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
         >
-          <ThreadInput createThreadHandler={createThreadHandler} />
+          <ThreadInput createThreadHandler={onCreateThread} />
         </motion.div>
       )}
     </section>

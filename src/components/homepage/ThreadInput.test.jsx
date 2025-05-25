@@ -1,5 +1,5 @@
-import { cleanup, render, screen } from '@testing-library/react';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
 import ThreadInput from './ThreadInput';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/vitest';
@@ -53,24 +53,30 @@ describe('ThreadInput component', () => {
     // Arrange
     const mockCreateThreadHandler = vi.fn();
     render(<ThreadInput createThreadHandler={mockCreateThreadHandler} />);
+
     const titleInput = screen.getByPlaceholderText('Your thread title here');
     await userEvent.type(titleInput, 'title test');
+
     const bodyInput = screen.getByPlaceholderText(
       'What you think to write about this thread.....',
     );
     await userEvent.type(bodyInput, 'body test');
+
     const categoryInput = screen.getByPlaceholderText(
       'Your thread category here',
     );
     await userEvent.type(categoryInput, 'categorytest');
-    const createNewThreadButton = screen.getByRole('button', {
+
+    const submitNewThreadButton = screen.getByRole('button', {
       type: 'submit',
     });
 
     // Action
-    await userEvent.click(createNewThreadButton);
+    // await userEvent.click(submitNewThreadButton);
+    fireEvent.submit(submitNewThreadButton);
 
     // Assert
+    expect(mockCreateThreadHandler).toBeCalledTimes(1);
     expect(mockCreateThreadHandler).toBeCalledWith({
       event: expect.any(Object),
       title: 'title test',
