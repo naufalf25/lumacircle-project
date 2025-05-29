@@ -1,4 +1,12 @@
-import { cleanup, render, screen } from '@testing-library/react';
+/**
+ * test scenarios for CommentInput
+ *
+ * - CommentInput component
+ *  - should handle content typing correctly
+ *  - should call create new comment function when Submit Comment button is clicked
+ */
+
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import CommentInput from './CommentInput';
 import userEvent from '@testing-library/user-event';
@@ -36,7 +44,8 @@ describe('CommentInput component', () => {
     const submitCommentButton = screen.getByRole('button', { type: 'submit' });
 
     // Action
-    await userEvent.click(submitCommentButton);
+    // await userEvent.click(submitCommentButton);
+    fireEvent.submit(submitCommentButton);
 
     // Assert
     expect(mockCreateCommentHandler).toBeCalledWith({

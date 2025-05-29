@@ -1,3 +1,18 @@
+/**
+ * test scenarios for threadsReducer
+ *
+ * - threadsReducer function
+ *  - should return initial state when given by unknown action
+ *  - should return the threads when given by RECEIVE_THREADS action
+ *  - should return the threads with the new thread when given by CREATE_THREAD action
+ *  - should return the initial state if threadId not found when given by UPVOTE_THREAD, DOWNVOTE_THREAD, and NEUTRALIZE_THREAD_VOTE action
+ *  - should return the threads with the up vote thread when given by UPVOTE_THREAD action
+ *  - should return the threads with the down vote thread when given by DOWNVOTE_THREAD action
+ *  - should return the initial state if userId not found when given by NEUTRALIZE_THREAD_VOTE action
+ *  - should return the threads with the neutralize vote from up vote thread when given by NEUTRALIZE_THREAD_VOTE action
+ *  - should return the threads with the neutralize vote from down vote thread when given by NEUTRALIZE_THREAD_VOTE action
+ */
+
 import { describe, expect, it } from 'vitest';
 import threadsReducer from './reducer';
 

@@ -1,3 +1,32 @@
+/**
+ * test scenarios
+ *
+ * - asyncReceiveThreadDetail thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ * - asyncUpvoteThreadDetail thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ * - asyncDownvoteThreadDetail thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ * - asyncNeutralizeThreadDetailVote thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ * - asyncCreateComment thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ * - asyncUpvoteComment thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ * - asyncDownvoteComment thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ * - asyncNeutralizeCommentVote thunk
+ *  - should dispatch action correctly when data fetching success
+ *  - should dispatch action and alert correctly when data fetching failed
+ */
+
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import api from '../../utils/api';
 import {
@@ -245,7 +274,7 @@ describe('asyncDownvoteThreadDetail thunk', () => {
   });
 });
 
-describe('asyncDownvoteThreadDetail thunk', () => {
+describe('asyncNeutralizeThreadDetailVote thunk', () => {
   beforeEach(() => {
     vi.spyOn(api, 'neutralizeThreadVote');
   });
@@ -294,7 +323,7 @@ describe('asyncDownvoteThreadDetail thunk', () => {
   });
 });
 
-describe('createComment thunk', () => {
+describe('asyncCreateComment thunk', () => {
   beforeEach(() => {
     vi.spyOn(api, 'createComment');
   });

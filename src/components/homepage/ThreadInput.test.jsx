@@ -1,5 +1,15 @@
+/**
+ * test scenarios for ThreadInput
+ *
+ * - ThreadInput component
+ *  - should handle title typing correctly
+ *  - should handle body typing correctly
+ *  - should handle category typing correctly
+ *  - should call create thread function when Create New Thread button is clicked
+ */
+
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
-import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import ThreadInput from './ThreadInput';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom/vitest';
