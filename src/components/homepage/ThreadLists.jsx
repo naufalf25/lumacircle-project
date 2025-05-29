@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ThreadItem from './ThreadItem';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
-import { AnimatePresence, motion } from 'motion/react';
+import { motion } from 'motion/react';
 
 function ThreadLists({ threads, onUpvote, onDownvote }) {
   const threadsSorted = threads.sort((a, b) => b.createdAt - a.createdAt);

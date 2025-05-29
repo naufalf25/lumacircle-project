@@ -1,7 +1,28 @@
+/**
+ * test scenarios for threadDetailReducer
+ *
+ * - threadDetailReducer function
+ *  - should return initial state when given by unknown action
+ *  - should return the thread detail when given by RECEIVE_THREAD_DETAIL action
+ *  - should return null when given by CLEAR_THREAD_DETAIL action
+ *  - should return the threadDetail with the up vote thread when given by UPVOTE_THREAD_DETAIL action
+ *  - should return the threadDetail with the down vote thread when given by DOWNVOTE_THREAD_DETAIL action
+ *  - should return the initial state if userId not found when given by NEUTRALIZE_THREAD_DETAIL_VOTE action
+ *  - should return the threadDetail with the neutralize thread vote from up vote when given by NEUTRALIZE_THREAD_DETAIL_VOTE action
+ *  - should return the threadDetail with the neutralize thread vote from down vote when given by NEUTRALIZE_THREAD_DETAIL_VOTE action
+ *  - should return the threadDetail with the new comment when given by CREATE_COMMENT action
+ *  - should return the initial state if commentId not found when given by UPVOTE_COMMENT, DOWNVOTE_COMMENT, and NEUTRALIZE_COMMENT_VOTE action
+ *  - should return the threadDetail with the up vote comment when given by UPVOTE_COMMENT action
+ *  - should return the threadDetail with the down vote comment when given by DOWNVOTE_COMMENT action
+ *  - should return the initial state if userId not found when given by NEUTRALIZE_COMMENT_VOTE action
+ *  - should return the threadDetail with the neutralize comment vote from up vote comment when given by NEUTRALIZE_COMMENT_VOTE action
+ *  - should return the threadDetail with the neutralize comment vote from down vote comment when given by NEUTRALIZE_COMMENT_VOTE action
+ */
+
 import { describe, expect, it } from 'vitest';
 import threadDetailReducer from './reducer';
 
-describe('ThreadDetailReducer function', () => {
+describe('threadDetailReducer function', () => {
   it('should return initial state when given by unknown action', () => {
     // Arrange
     const initialState = null;
